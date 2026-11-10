@@ -113,3 +113,4 @@ graph TD
 - **Relational Integrity:** Foreign keys on all parent-child hierarchies (`properties` $\rightarrow$ `policies` $\rightarrow$ `coverage_snapshots`, `monitoring_evaluations`, `review_cases`).
 - **Indexes:** Composite indexes on `(policy_id, evaluation_date)`, `(status, itv_classification)`, `(property_id, created_at)`.
 - **Auditability:** Dedicated `audit_logs` table recording timestamp, username, action, entity type, entity ID, previous state, new state, and IP address.
+

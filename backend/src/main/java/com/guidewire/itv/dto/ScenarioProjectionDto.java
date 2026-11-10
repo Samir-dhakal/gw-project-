@@ -85,3 +85,4 @@ public class ScenarioProjectionDto {
     public List<ScenarioOption> getScenarios() { return scenarios; }
     public void setScenarios(List<ScenarioOption> scenarios) { this.scenarios = scenarios; }
 }
+

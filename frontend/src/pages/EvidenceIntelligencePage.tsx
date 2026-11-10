@@ -139,3 +139,4 @@ export const EvidenceIntelligencePage: React.FC = () => {
     </div>
   );
 };
+

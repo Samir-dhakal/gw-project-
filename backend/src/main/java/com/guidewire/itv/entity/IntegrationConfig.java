@@ -70,3 +70,4 @@ public class IntegrationConfig {
     public String getProvenanceCategory() { return provenanceCategory; }
     public void setProvenanceCategory(String provenanceCategory) { this.provenanceCategory = provenanceCategory; }
 }
+

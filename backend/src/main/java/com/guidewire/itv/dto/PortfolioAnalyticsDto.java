@@ -59,3 +59,4 @@ public class PortfolioAnalyticsDto {
     public Map<String, Long> getConfidenceDistribution() { return confidenceDistribution; }
     public void setConfidenceDistribution(Map<String, Long> confidenceDistribution) { this.confidenceDistribution = confidenceDistribution; }
 }
+

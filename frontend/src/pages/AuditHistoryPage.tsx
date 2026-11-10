@@ -125,3 +125,4 @@ export const AuditHistoryPage: React.FC = () => {
     </div>
   );
 };
+

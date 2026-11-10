@@ -24,3 +24,4 @@ public interface PolicyRepository extends JpaRepository<Policy, Long> {
 
     long countByPolicyStatus(String policyStatus);
 }
+

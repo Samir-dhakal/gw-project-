@@ -203,3 +203,4 @@ public class EvidenceConfidenceService {
         return agreementScore.max(new BigDecimal("50.00")).setScale(2, RoundingMode.HALF_UP);
     }
 }
+

@@ -13,3 +13,4 @@ public interface EvidenceRecordRepository extends JpaRepository<EvidenceRecord, 
 
     List<EvidenceRecord> findBySourceId(String sourceId);
 }
+

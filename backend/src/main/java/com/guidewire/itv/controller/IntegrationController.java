@@ -36,3 +36,4 @@ public class IntegrationController {
         return ResponseEntity.ok(config);
     }
 }
+

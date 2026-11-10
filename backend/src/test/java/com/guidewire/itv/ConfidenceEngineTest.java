@@ -125,3 +125,4 @@ class ConfidenceEngineTest {
         assertTrue(result.getMissingFields().contains("builtUpAreaSqm"));
     }
 }
+

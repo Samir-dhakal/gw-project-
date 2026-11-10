@@ -20,3 +20,4 @@ public interface ReviewCaseRepository extends JpaRepository<ReviewCase, Long> {
 
     long countByStatus(String status);
 }
+

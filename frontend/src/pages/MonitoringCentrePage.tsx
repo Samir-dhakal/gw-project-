@@ -191,3 +191,4 @@ export const MonitoringCentrePage: React.FC = () => {
     </div>
   );
 };
+

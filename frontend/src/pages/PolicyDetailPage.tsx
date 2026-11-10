@@ -345,3 +345,4 @@ export const PolicyDetailPage: React.FC = () => {
     </div>
   );
 };
+

@@ -60,3 +60,4 @@ public class EvidenceRecordDto {
     public Boolean getIsValid() { return isValid; }
     public void setIsValid(Boolean valid) { isValid = valid; }
 }
+

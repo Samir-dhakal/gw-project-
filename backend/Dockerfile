@@ -10,3 +10,4 @@ WORKDIR /app
 COPY --from=build /app/target/itv-intelligence-engine-*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+

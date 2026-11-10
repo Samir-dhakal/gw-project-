@@ -107,3 +107,4 @@ INSERT INTO audit_logs (id, timestamp, username, action, entity_type, entity_id,
 (2, '2024-11-01 02:00:00', 'SYSTEM_MONITOR', 'SCHEDULED_MONITORING', 'EVALUATION', '2', 'Continuous monitoring executed. Deterioration detected on POL-IN-2025-00101 (ITV: 76.92%, Drift: -23.08%).'),
 (3, '2024-11-01 02:05:00', 'SYSTEM_MONITOR', 'CASE_CREATED', 'CASE', 'CASE-2024-00101', 'Review case generated for critical underinsurance shortfall ₹15,00,000.'),
 (4, '2024-11-05 02:05:00', 'SYSTEM_MONITOR', 'ABSTENTION_TRIGGERED', 'EVALUATION', '5', 'Hard Abstention executed on POL-IN-2025-00104 due to 31.43% estimate contradiction. Verification task generated.');
+

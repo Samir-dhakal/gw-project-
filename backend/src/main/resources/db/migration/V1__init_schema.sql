@@ -181,3 +181,4 @@ CREATE INDEX idx_policy_expiry ON policies(expiry_date);
 CREATE INDEX idx_eval_policy_time ON monitoring_evaluations(policy_id, evaluation_timestamp);
 CREATE INDEX idx_case_status ON review_cases(status);
 CREATE INDEX idx_audit_time ON audit_logs(timestamp);
+

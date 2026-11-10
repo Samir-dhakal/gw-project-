@@ -74,3 +74,4 @@ public class PropertyDto {
     public String getRenovationDetails() { return renovationDetails; }
     public void setRenovationDetails(String renovationDetails) { this.renovationDetails = renovationDetails; }
 }
+

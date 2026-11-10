@@ -23,3 +23,4 @@ public class ScenarioProjectionRequest {
     public BigDecimal getCustomCoverageLimit() { return customCoverageLimit; }
     public void setCustomCoverageLimit(BigDecimal customCoverageLimit) { this.customCoverageLimit = customCoverageLimit; }
 }
+

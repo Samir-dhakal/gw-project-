@@ -19,3 +19,4 @@ commodity_code,commodity_name,major_group,base_year,month,year,index_value,is_pr
 1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,08,2024,153.5,false
 1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,09,2024,154.2,true
 1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,10,2024,155.0,true
+

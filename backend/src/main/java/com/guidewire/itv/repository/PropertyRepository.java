@@ -10,3 +10,4 @@ import java.util.Optional;
 public interface PropertyRepository extends JpaRepository<Property, Long> {
     Optional<Property> findByPropertyCode(String propertyCode);
 }
+

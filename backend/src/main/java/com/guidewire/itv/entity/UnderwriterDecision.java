@@ -55,3 +55,4 @@ public class UnderwriterDecision {
     public LocalDateTime getDecisionTimestamp() { return decisionTimestamp; }
     public void setDecisionTimestamp(LocalDateTime decisionTimestamp) { this.decisionTimestamp = decisionTimestamp; }
 }
+

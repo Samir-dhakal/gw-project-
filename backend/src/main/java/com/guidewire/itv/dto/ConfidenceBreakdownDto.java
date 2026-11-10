@@ -63,3 +63,4 @@ public class ConfidenceBreakdownDto {
     public String getRecommendedVerificationAction() { return recommendedVerificationAction; }
     public void setRecommendedVerificationAction(String recommendedVerificationAction) { this.recommendedVerificationAction = recommendedVerificationAction; }
 }
+

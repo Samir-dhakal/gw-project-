@@ -156,3 +156,4 @@ export const MidtermManagementPage: React.FC = () => {
     </div>
   );
 };
+

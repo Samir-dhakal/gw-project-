@@ -178,3 +178,4 @@ export const ConfidenceAbstentionPage: React.FC = () => {
     </div>
   );
 };
+

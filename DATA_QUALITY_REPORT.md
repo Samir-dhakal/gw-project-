@@ -29,3 +29,4 @@ This report establishes data quality criteria, verification rubrics, anomaly det
 3. **Temporal Validity:**
    - `inception_date <= expiry_date`.
    - Rebuilding cost estimate date cannot be in the future.
+

@@ -69,3 +69,4 @@ To guarantee transparency and defend against academic criticism regarding data i
 4. `DERIVED_DATA`: Rebuilding cost estimates calculated deterministically from verified plinth rates, built-up areas, and material escalation formulas.
 5. `SYNTHETIC_DEMO_DATA`: Policyholder names, policy numbers, and insured coverage limits (since Indian public data does not publish private household policy contracts). Clearly labelled in all UI views.
 6. `SIMULATED_API`: Mock adapters replicating exact production schemas when external credentials or live access are pending.
+

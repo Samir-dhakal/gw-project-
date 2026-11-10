@@ -73,3 +73,4 @@ public class PolicyDetailDto {
     public List<ReviewCaseDto> getReviewCases() { return reviewCases; }
     public void setReviewCases(List<ReviewCaseDto> reviewCases) { this.reviewCases = reviewCases; }
 }
+

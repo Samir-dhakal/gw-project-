@@ -67,3 +67,4 @@ During project reviews, defend these key principles:
    *Answer:* No. HazardHub specializes in geographic peril hazard scoring and third-party data enrichment. Our engine is a complementary in-force monitoring and resolution system that could ingest HazardHub signals alongside government construction schedules, continuously tracking ITV deterioration post-issuance.
 3. **"Why use Indian data (Tamil Nadu) instead of US data?"**
    *Answer:* India is an emerging home insurance market under IRDAI with acute underinsurance risks. Demonstrating applicability using genuine Indian public datasets (CPWD Plinth Area Rates 2025, MoSPI CPI, DPIIT WPI, GOBS building stock) proves the architectural extensibility to international and regional jurisdictions.
+

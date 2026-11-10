@@ -91,3 +91,4 @@ public class EvidenceRecord {
     public Boolean getIsValid() { return isValid; }
     public void setIsValid(Boolean valid) { isValid = valid; }
 }
+

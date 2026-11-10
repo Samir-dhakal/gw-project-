@@ -11,3 +11,4 @@ public interface IntegrationConfigRepository extends JpaRepository<IntegrationCo
 
     Optional<IntegrationConfig> findBySourceId(String sourceId);
 }
+

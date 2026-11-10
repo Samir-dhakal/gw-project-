@@ -15,3 +15,4 @@ public interface UnderwriterDecisionRepository extends JpaRepository<Underwriter
 
     long countByDecisionType(String decisionType);
 }
+

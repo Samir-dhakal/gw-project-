@@ -34,3 +34,4 @@ public interface MonitoringEvaluationRepository extends JpaRepository<Monitoring
 
     long countByConfidenceCategory(String confidenceCategory);
 }
+

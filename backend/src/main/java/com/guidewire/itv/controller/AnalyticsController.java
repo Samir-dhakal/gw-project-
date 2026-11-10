@@ -27,3 +27,4 @@ public class AnalyticsController {
         return ResponseEntity.ok(analytics);
     }
 }
+

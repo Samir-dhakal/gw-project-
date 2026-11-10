@@ -16,3 +16,4 @@ public interface CoverageSnapshotRepository extends JpaRepository<CoverageSnapsh
     @Query("SELECT s FROM CoverageSnapshot s WHERE s.policy.id = :policyId ORDER BY s.effectiveDate DESC, s.recordedAt DESC")
     List<CoverageSnapshot> findLatestSnapshotsByPolicyId(@Param("policyId") Long policyId);
 }
+

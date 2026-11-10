@@ -79,3 +79,4 @@ public class PolicySummaryDto {
     public String getWorkflowType() { return workflowType; }
     public void setWorkflowType(String workflowType) { this.workflowType = workflowType; }
 }
+

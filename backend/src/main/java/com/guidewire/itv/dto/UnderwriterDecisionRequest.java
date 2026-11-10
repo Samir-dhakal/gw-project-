@@ -31,3 +31,4 @@ public class UnderwriterDecisionRequest {
     public String getDecisionNotes() { return decisionNotes; }
     public void setDecisionNotes(String decisionNotes) { this.decisionNotes = decisionNotes; }
 }
+

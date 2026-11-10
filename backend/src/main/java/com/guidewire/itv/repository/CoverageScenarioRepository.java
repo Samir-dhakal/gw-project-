@@ -11,3 +11,4 @@ public interface CoverageScenarioRepository extends JpaRepository<CoverageScenar
 
     List<CoverageScenario> findByReviewCaseId(Long caseId);
 }
+

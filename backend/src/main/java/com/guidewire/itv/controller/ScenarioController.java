@@ -27,3 +27,4 @@ public class ScenarioController {
         return ResponseEntity.ok(projection);
     }
 }
+

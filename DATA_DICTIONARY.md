@@ -176,3 +176,4 @@ System-wide immutable audit trail for security and regulatory compliance.
 | `entity_type` | VARCHAR(50) | NOT NULL | `POLICY`, `EVALUATION`, `CASE`, `DECISION` |
 | `entity_id` | VARCHAR(50) | NOT NULL | Identifier of affected entity |
 | `details` | TEXT | NULL | JSON or textual diff of state change |
+

@@ -32,3 +32,4 @@ export const ItvBadge: React.FC<ItvBadgeProps> = ({ classification, size = 'md' 
     </span>
   );
 };
+

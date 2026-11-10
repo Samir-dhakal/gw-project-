@@ -20,3 +20,4 @@ public interface RebuildingCostEstimateRepository extends JpaRepository<Rebuildi
     @Query("SELECT e FROM RebuildingCostEstimate e WHERE e.property.id = :propertyId ORDER BY e.estimateDate DESC")
     List<RebuildingCostEstimate> findAllEstimatesByPropertyId(@Param("propertyId") Long propertyId);
 }
+

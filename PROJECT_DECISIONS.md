@@ -32,3 +32,4 @@
 - **Context:** Underwriters need to test 80%, 90%, 95%, 100%, and custom coverage limits.
 - **Decision:** The scenario simulator operates as a pure functional projection endpoint that accepts hypothetical parameters and returns calculated gaps and ITV ratios without writing to or mutating the `policies` table.
 - **Rationale:** Under insurance law, a policy coverage limit can only be modified via an authorized endorsement signed off by an authorized underwriter and agreed upon with the policyholder.
+

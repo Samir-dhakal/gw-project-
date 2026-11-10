@@ -24,3 +24,4 @@
    - Integrate automated roof classification and change detection models comparing historical satellite imagery to detect unnotified second-floor additions or rooftop structures.
 4. **Machine Learning Confidence Calibration:**
    - Transition the four-component heuristic confidence formula ($S, F, K, A$) to a calibrated Bayesian uncertainty framework trained on empirical claim settlement loss histories.
+

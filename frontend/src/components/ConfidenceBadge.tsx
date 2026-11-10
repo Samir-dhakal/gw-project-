@@ -37,3 +37,4 @@ export const ConfidenceBadge: React.FC<ConfidenceBadgeProps> = ({ category, scor
     </span>
   );
 };
+

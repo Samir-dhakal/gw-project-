@@ -105,3 +105,4 @@ export const PropertyIntelligencePage: React.FC = () => {
     </div>
   );
 };
+
