@@ -145,6 +145,72 @@
           }
         }
       ]
+    },
+    {
+      "name": "Data Integrations & Importers",
+      "item": [
+        {
+          "name": "Get All Integrations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations"
+          }
+        },
+        {
+          "name": "Sync Integration (CPWD)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations/sync/CPWD_PAR_2025"
+          }
+        },
+        {
+          "name": "Import Synthetic CSVs (SYNTHETIC_DEMO_DATA)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations/import/synthetic-csv"
+          }
+        },
+        {
+          "name": "Import TN PWD Schedule of Rates 2025-26",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations/import/pwd-rates"
+          }
+        },
+        {
+          "name": "Import DPIIT WPI Materials Series",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations/import/wpi-series"
+          }
+        },
+        {
+          "name": "Import TN Urban Building Footprints",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/integrations/import/building-footprints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit & Compliance",
+      "item": [
+        {
+          "name": "Get Recent Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": "http://localhost:8080/api/v1/audit/recent"
+          }
+        }
+      ]
     }
   ]
 }

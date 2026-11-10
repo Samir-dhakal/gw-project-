@@ -216,3 +216,4 @@ Therefore, our system positions AI and automation as **Decision Support**, not a
 - **Hard Abstention:** An architectural safeguard where the system explicitly declines to make a recommendation due to violated data integrity or conflicting evidence invariants.
 - **Zero Policy Mutation:** Architectural guarantee that exploratory simulations execute strictly in-memory without altering stored policy records.
 - **Temporal Immutability:** Append-only ledger pattern where historical state is never overwritten, enabling retrospective auditability.
+

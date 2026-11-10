@@ -50,3 +50,4 @@ public class ImportResultDto {
     public String getProvenanceLabel() { return provenanceLabel; }
     public void setProvenanceLabel(String provenanceLabel) { this.provenanceLabel = provenanceLabel; }
 }
+

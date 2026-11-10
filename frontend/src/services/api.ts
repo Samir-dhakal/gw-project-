@@ -30,11 +30,12 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor to handle 401 unauth
+// Response interceptor to handle 401/403 unauth
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 && !window.location.pathname.includes('/login')) {
+    if ((error.response?.status === 401 || error.response?.status === 403) && !window.location.pathname.includes('/login')) {
+      // If demo token expired or unauthorized, reset and route to login
       localStorage.removeItem('itv_token');
       localStorage.removeItem('itv_user');
       window.location.href = '/login';
