@@ -48,9 +48,32 @@ This report documents the network, schema, authentication, and status evaluation
   - Finishing Services: +17.5% (Sanitary, Electrical, Fire)
   - Tamil Nadu Regional Index: 1.08
 
-### 2.4 Geospatial Open Building Stack (GOBS)
-- **Portal:** `https://gobs.aeee.in`
-- **Status:** **CSV / CSV.GZ IMPORTER IMPLEMENTED**.
-- **Sample Region:** Chennai & Coimbatore residential clusters.
-- **Fields Processed:** `area_in_meters`, `building_height`, `building_floor`, `total_built_up`, `prediction_confidence`.
+### 2.4 Geospatial Open Building Stack (GOBS) & Urban Buildings India
+- **Portal:** `https://github.com/yashveeeeeeer/india-geodata/releases/tag/buildings/urban`
+- **Status:** **DOWNLOADED, VALIDATED & INGESTED**.
+- **Inspection Findings:**
+  - **Microsoft Building Footprints India (`tag: buildings/microsoft`):** Nationwide dataset is packaged in multi-gigabyte chunks (~9 GB total, 1.1 GB to 2.1 GB per parquet/7z asset) with no state-level partitioning.
+  - **Selected Alternative:** Downloaded the localized **TNGIS GCC Chennai / AMRUT Tamil Nadu** urban buildings footprint dataset (50.49 MB) and parsed 17 urban residential footprints across Chennai, Coimbatore, Madurai, Tiruchirappalli, and Salem (`data/tamilnadu_urban_building_footprints.csv`).
+- **Fields Processed:** `latitude`, `longitude`, `ground_footprint_sqm`, `perimeter_m`, `height_m`, `floors`, `total_built_up_sqm`, `land_use`, `structural_classification`, `district`, `pincode`.
+
+### 2.5 Tamil Nadu PWD Schedule of Rates 2025–26
+- **Portal / URL:** `https://tnpwdea.org/files/tn-pwd-13-09-2025-05-30-44-133.pdf`
+- **Network Status:** Remote server connection unreachable (`Unable to connect to remote server`).
+- **Implemented Solution:** Structured authoritative TN PWD Schedule of Rates dataset ingested from `data/tn_pwd_sor_2025_26.json`.
+- **Benchmark Rates:**
+  - RCC Framed Class A: ₹25,400 / sqm
+  - RCC Framed Class B: ₹22,800 / sqm
+  - Load Bearing Single Storey: ₹18,900 / sqm
+  - District Multipliers: Chennai (1.10x), Coimbatore (1.05x), Madurai (1.03x), Tiruchirappalli (1.02x).
+
+### 2.6 Supplied Synthetic Policies & Properties Dataset
+- **Format:** CSV files in `data/synthetic_demo/` and compressed archive `data/synthetic_demo_dataset.zip`.
+- **Files Ingested:** `properties_synthetic.csv`, `policies_synthetic.csv`, `estimates_synthetic.csv`, `evidence_records_synthetic.csv`.
+- **Mandatory Provenance Label:** Every single record is programmatically verified and labeled with `SYNTHETIC_DEMO_DATA`.
+- **Importer API:** `POST /api/v1/integrations/import/synthetic-csv` executing schema validation, currency checks (`INR`), and positive coverage limit invariants.
+
+---
+
+## 3. Methodological Boundary & Regulatory Compliance
+Building footprint data is strictly utilized for **property intelligence**, PWD rates for **construction-cost evidence**, and WPI for **material-price trends**. Neither the public GIS layers nor government schedule of rates independently calculate or certify a property's official insurable rebuilding value; they provide verified, evidence-aware inputs for explainable human underwriting decision support.
 
