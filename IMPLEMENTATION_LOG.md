@@ -57,3 +57,17 @@
   - Total: 12 tests run, 0 failures, 0 errors.
 - Executed Vite production build: `npm run build` completed with zero TypeScript errors.
 - Created `start_all.bat`, `docker-compose.yml`, Dockerfiles, `.env.example`, and Postman API collection.
+
+### Entry 005 — Live Runtime Verification & Scenario Validation
+- Packaged executable Spring Boot production archive `target/itv-intelligence-engine-1.0.0-SNAPSHOT.jar`.
+- Resolved H2 2.2.x Flyway read-only compatibility by pruning `;AUTO_SERVER=TRUE` from the local dev JDBC URL.
+- Launched backend microservice on `http://localhost:8080` (PID 25556); Flyway automatically migrated 2 schema versions and seeded demo records into H2 embedded database.
+- Launched Vite frontend development server on `http://localhost:5173`.
+- Verified live end-to-end integration:
+  - **Authentication:** `POST /api/v1/auth/login` successfully returned JWT token and session claims for underwriter credentials.
+  - **Scenario A (ITV Drift):** Querying `POL-IN-2025-00101` verified Coverage: ₹50,00,000, Rebuilding Cost: ₹65,00,000, ITV: 76.92%, Coverage Gap: ₹15,00,000, Drift: -23.08%, Status: CRITICAL, Confidence: 88.75% (HIGH).
+  - **Scenario B (Hard Abstention):** Querying `POL-IN-2025-00104` verified abstention triggered due to 31.43% divergence between builder invoice (₹70L) and CPWD estimate (₹92L), exceeding the 20% tolerance, with Staleness at 756 days.
+  - **Scenario C (Renewal Decision & Audit):** Approved endorsement for Case 2 (`CASE-2024-00102`), updating policy coverage from ₹45,00,000 to ₹60,00,000, transitioning case status to `RESOLVED`, and recording immutable audit log entry #5.
+  - **Scenario Simulation:** Verified read-only projections for 80%, 90%, 95%, 100%, and custom limits with zero database mutation on policy coverage.
+  - **OpenAPI / Swagger:** Verified `GET /v3/api-docs` returning HTTP 200 with 19 documented API paths.
+  - **Frontend Live:** Verified HTTP 200 response on `http://localhost:5173` serving the Single Page Application.
