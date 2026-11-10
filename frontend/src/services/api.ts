@@ -10,6 +10,7 @@ import {
   ScenarioProjection,
   PortfolioAnalytics,
   IntegrationConfig,
+  ImportResult,
   AuditLog
 } from '../types';
 
@@ -143,6 +144,22 @@ export const integrationApi = {
   },
   syncIntegration: async (sourceId: string): Promise<IntegrationConfig> => {
     const res = await api.post<IntegrationConfig>(`/integrations/sync/${sourceId}`);
+    return res.data;
+  },
+  importSyntheticCsv: async (): Promise<ImportResult> => {
+    const res = await api.post<ImportResult>('/integrations/import/synthetic-csv');
+    return res.data;
+  },
+  importPwdRates: async (): Promise<ImportResult> => {
+    const res = await api.post<ImportResult>('/integrations/import/pwd-rates');
+    return res.data;
+  },
+  importWpiSeries: async (): Promise<ImportResult> => {
+    const res = await api.post<ImportResult>('/integrations/import/wpi-series');
+    return res.data;
+  },
+  importBuildingFootprints: async (): Promise<ImportResult> => {
+    const res = await api.post<ImportResult>('/integrations/import/building-footprints');
     return res.data;
   },
 };

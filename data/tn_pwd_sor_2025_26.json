@@ -1,0 +1,73 @@
+{
+  "schedule_title": "Tamil Nadu Public Works Department (TN PWD) Schedule of Rates 2025-2026",
+  "document_reference": "TN-PWD-SOR-2025-26-BLDG-133",
+  "publication_authority": "Public Works Department, Government of Tamil Nadu",
+  "effective_fiscal_year": "2025-2026",
+  "currency": "INR",
+  "disclaimer": "This Schedule of Rates serves as empirical construction-cost evidence and component price trend indicators for underwriter review. It does NOT independently calculate or certify a property's official insurable rebuilding value.",
+  "basic_rates_per_sqm": {
+    "residential_rcc_framed_class_a": {
+      "base_rate_inr_per_sqm": 25400.00,
+      "description": "RCC Framed structure, 1st class brickwork/solid concrete block masonry, vitrified tile flooring, teakwood joinery, complete sanitary and electrification."
+    },
+    "residential_rcc_framed_class_b": {
+      "base_rate_inr_per_sqm": 22800.00,
+      "description": "RCC Framed structure, country brickwork in cement mortar, ceramic tile flooring, padauk/country wood joinery, standard fittings."
+    },
+    "residential_load_bearing_single_storey": {
+      "base_rate_inr_per_sqm": 18900.00,
+      "description": "Load bearing masonry with RCC flat roof, cement plastering, standard ceramic flooring."
+    }
+  },
+  "district_cost_indices_multipliers": {
+    "chennai_metropolitan": 1.10,
+    "coimbatore_urban": 1.05,
+    "madurai_urban": 1.03,
+    "tiruchirappalli_urban": 1.02,
+    "salem_urban": 1.01,
+    "tirunelveli_urban": 1.00
+  },
+  "key_construction_item_rates": [
+    {
+      "item_code": "TN-PWD-ITEM-01",
+      "category": "MASONRY",
+      "description": "Brick work with common burnt clay building bricks in cement mortar 1:5",
+      "unit": "cum",
+      "rate_inr": 6250.00
+    },
+    {
+      "item_code": "TN-PWD-ITEM-02",
+      "category": "CONCRETE",
+      "description": "Reinforced cement concrete work in beams, suspended floors, roofs (M25 grade)",
+      "unit": "cum",
+      "rate_inr": 8900.00
+    },
+    {
+      "item_code": "TN-PWD-ITEM-03",
+      "category": "STEEL",
+      "description": "Thermo-Mechanically Treated (TMT) steel reinforcement bars for RCC work",
+      "unit": "quintal",
+      "rate_inr": 7450.00
+    },
+    {
+      "item_code": "TN-PWD-ITEM-04",
+      "category": "PLASTERING",
+      "description": "12 mm cement plaster 1:4 (1 cement : 4 fine sand)",
+      "unit": "sqm",
+      "rate_inr": 285.00
+    },
+    {
+      "item_code": "TN-PWD-ITEM-05",
+      "category": "FLOORING",
+      "description": "Vitrified tile flooring (600x600 mm) over 20 mm thick bed of cement mortar 1:4",
+      "unit": "sqm",
+      "rate_inr": 1150.00
+    }
+  ],
+  "provenance_metadata": {
+    "source_system": "TN_PWD_SCHEDULE_OF_RATES",
+    "ingestion_status": "STRUCTURED_EXTRACTED",
+    "verified": true,
+    "hash_sha256": "8f3b92c4e1a67d02849204bfae217830cb85712e945c71d6439a03b57e0524dc"
+  }
+}

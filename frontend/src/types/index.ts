@@ -1,3 +1,15 @@
+export interface ImportResult {
+  datasetName: string;
+  sourceFile: string;
+  recordsProcessed: number;
+  recordsImported: number;
+  recordsUpdated: number;
+  validationErrorsCount: number;
+  validationMessages: string[];
+  status: string;
+  provenanceLabel: string;
+}
+
 export interface User {
   id: number;
   username: string;

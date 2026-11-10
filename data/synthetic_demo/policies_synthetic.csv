@@ -1,0 +1,7 @@
+policy_number,property_code,policyholder_name,policyholder_email,policyholder_phone,coverage_limit,premium_annual,currency,inception_date,expiry_date,policy_status,workflow_type,provenance_label
+POL-IN-2025-00101,PROP-TN-CHN-001,"M. K. Balasubramanian",balasubramanian.mk@demo.example.in,+91-98401-22334,5000000.00,12500.00,INR,2024-03-01,2025-03-01,ACTIVE,MIDTERM_REVIEW,SYNTHETIC_DEMO_DATA
+POL-IN-2025-00102,PROP-TN-CHN-002,"Priya Senthil Kumar",priya.senthilkumar@demo.example.in,+91-98402-33445,4500000.00,11250.00,INR,2023-12-15,2024-12-15,ACTIVE,RENEWAL_REVIEW,SYNTHETIC_DEMO_DATA
+POL-IN-2025-00103,PROP-TN-CBE-003,"K. Vijayaraghavan",vijay.raghavan@demo.example.in,+91-94431-44556,3750000.00,9375.00,INR,2024-01-10,2025-01-10,ACTIVE,MONITORING,SYNTHETIC_DEMO_DATA
+POL-IN-2025-00104,PROP-TN-CBE-004,"S. Radhakrishnan",radhakrishnan.s@demo.example.in,+91-94432-55667,6500000.00,16250.00,INR,2024-05-10,2025-05-10,ACTIVE,MIDTERM_REVIEW,SYNTHETIC_DEMO_DATA
+POL-IN-2025-00105,PROP-TN-MDU-005,"Meenakshi Sundaram",meenakshi.sundaram@demo.example.in,+91-98421-66778,3800000.00,9500.00,INR,2024-02-20,2025-02-20,ACTIVE,MONITORING,SYNTHETIC_DEMO_DATA
+POL-IN-2025-00106,PROP-TN-TRY-006,"D. Annamalai",annamalai.d@demo.example.in,+91-98422-77889,4200000.00,10500.00,INR,2024-04-05,2025-04-05,ACTIVE,MIDTERM_REVIEW,SYNTHETIC_DEMO_DATA
