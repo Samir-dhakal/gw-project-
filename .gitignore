@@ -1,0 +1,23 @@
+# Node
+node_modules/
+dist/
+.vite/
+
+# Maven / Java
+target/
+*.class
+*.jar
+*.war
+
+# H2 Database
+data/*.db
+data/*.db.*
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Logs
+*.log

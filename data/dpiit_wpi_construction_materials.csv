@@ -1,0 +1,21 @@
+commodity_code,commodity_name,major_group,base_year,month,year,index_value,is_provisional
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,01,2024,132.4,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,02,2024,133.1,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,03,2024,133.8,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,04,2024,134.5,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,05,2024,135.2,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,06,2024,136.0,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,07,2024,136.9,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,08,2024,137.7,false
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,09,2024,138.6,true
+1307000000,Manufactured Products - Cement Lime and Plaster,Manufactured Products,2022-23,10,2024,139.4,true
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,01,2024,146.2,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,02,2024,147.0,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,03,2024,148.5,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,04,2024,149.8,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,05,2024,151.1,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,06,2024,152.0,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,07,2024,152.9,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,08,2024,153.5,false
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,09,2024,154.2,true
+1314000000,Basic Metals - Mild Steel Bars and Rods,Basic Metals,2022-23,10,2024,155.0,true

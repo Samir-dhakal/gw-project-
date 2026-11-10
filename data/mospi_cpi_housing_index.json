@@ -1,0 +1,35 @@
+{
+  "source": "Ministry of Statistics and Programme Implementation (MoSPI)",
+  "portal": "https://api.mospi.gov.in",
+  "endpoint": "/api/cpi/getCPIIndex",
+  "base_year": 2012,
+  "records": [
+    {
+      "sector": "Urban",
+      "state": "Tamil Nadu",
+      "year": 2024,
+      "month": "09",
+      "group": "Housing",
+      "index_value": 182.6,
+      "inflation_rate": 4.82
+    },
+    {
+      "sector": "Urban",
+      "state": "Tamil Nadu",
+      "year": 2024,
+      "month": "10",
+      "group": "Housing",
+      "index_value": 183.9,
+      "inflation_rate": 5.04
+    },
+    {
+      "sector": "Urban",
+      "state": "All India",
+      "year": 2024,
+      "month": "10",
+      "group": "General Index",
+      "index_value": 192.4,
+      "inflation_rate": 5.12
+    }
+  ]
+}

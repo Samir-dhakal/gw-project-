@@ -1,0 +1,48 @@
+{
+  "publication": "CPWD Plinth Area Rates 2025",
+  "edition": "12th Edition",
+  "base_date": "2025-04-01",
+  "base_location": "Delhi",
+  "base_cost_index": 100,
+  "rates": [
+    {
+      "code": "1.1.1",
+      "category": "Residential Quarters",
+      "structure_type": "RCC_FRAMED",
+      "max_storeys": 6,
+      "floor_height_m": 3.6,
+      "base_rate_inr_per_sqm": 23530.00,
+      "notes": "Includes structural frame, masonry, basic plastering, CP&OH, GST and Labour Cess"
+    },
+    {
+      "code": "1.1.2",
+      "category": "Residential Quarters",
+      "structure_type": "RCC_FRAMED",
+      "max_storeys": 6,
+      "floor_height_m": 3.0,
+      "base_rate_inr_per_sqm": 22100.00,
+      "notes": "Standard ceiling height"
+    },
+    {
+      "code": "1.2.1",
+      "category": "Residential Individual",
+      "structure_type": "LOAD_BEARING",
+      "max_storeys": 2,
+      "floor_height_m": 3.0,
+      "base_rate_inr_per_sqm": 18450.00,
+      "notes": "Traditional brick masonry with load-bearing walls"
+    }
+  ],
+  "regional_multipliers": {
+    "Delhi": 1.00,
+    "Chennai_Tamil_Nadu": 1.08,
+    "Coimbatore_Tamil_Nadu": 1.04,
+    "Madurai_Tamil_Nadu": 1.02,
+    "Tiruchirappalli_Tamil_Nadu": 1.01
+  },
+  "service_additions_percent": {
+    "internal_sanitary_and_water_supply": 7.5,
+    "internal_electrical_installations": 7.5,
+    "fire_protection_and_lightning": 2.5
+  }
+}

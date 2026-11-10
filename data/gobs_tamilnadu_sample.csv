@@ -1,0 +1,7 @@
+latitude,longitude,area_in_meters,perimeter,building_height,building_floor,total_built_up,landuse,is_predicted,prediction_confidence,state_name,district_name
+13.0850000,80.2100000,120.00,44.0,7.2,2,240.00,Residential,true,0.92,Tamil Nadu,Chennai
+13.0067000,80.2570000,160.00,52.0,3.6,1,160.00,Residential,true,0.95,Tamil Nadu,Chennai
+11.0089000,76.9510000,140.00,48.0,7.0,2,280.00,Residential,true,0.89,Tamil Nadu,Coimbatore
+11.0280000,76.9420000,160.00,52.0,7.2,2,320.00,Residential,true,0.91,Tamil Nadu,Coimbatore
+9.9252000,78.1400000,150.00,50.0,3.5,1,150.00,Residential,true,0.88,Tamil Nadu,Madurai
+10.8280000,78.6850000,105.00,42.0,7.0,2,210.00,Residential,true,0.90,Tamil Nadu,Tiruchirappalli
