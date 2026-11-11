@@ -72,5 +72,13 @@ public class IntegrationController {
         ImportResultDto result = dataImportService.importBuildingFootprints(path);
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping("/scale-portfolio")
+    @Operation(summary = "Scale active portfolio to realistic enterprise size (e.g., 50 policies) with automatic continuous evaluation")
+    @PreAuthorize("hasAnyRole('ADMIN', 'UNDERWRITER')")
+    public ResponseEntity<ImportResultDto> scalePortfolio(@RequestParam(defaultValue = "50") int count) {
+        ImportResultDto result = dataImportService.scalePortfolioTo(count);
+        return ResponseEntity.ok(result);
+    }
 }
 

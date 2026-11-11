@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Database, RefreshCw, CheckCircle, ExternalLink, AlertCircle, FileSpreadsheet, Download, ShieldCheck, MapPin, Building, Info } from 'lucide-react';
+import { Database, RefreshCw, CheckCircle, ExternalLink, AlertCircle, FileSpreadsheet, Download, ShieldCheck, MapPin, Building, Info, Layers } from 'lucide-react';
 import { integrationApi } from '../services/api';
 import { IntegrationConfig, ImportResult } from '../types';
 
@@ -101,7 +101,7 @@ export const DataIntegrationCentrePage: React.FC = () => {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Importer 1: Synthetic Dataset */}
           <div className="p-3.5 rounded-lg border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3">
             <div>
@@ -195,6 +195,30 @@ export const DataIntegrationCentrePage: React.FC = () => {
             >
               <Database className={`w-3.5 h-3.5 ${importingType === 'WPI' ? 'animate-spin' : ''}`} />
               <span>{importingType === 'WPI' ? 'Ingesting...' : 'Import WPI Series'}</span>
+            </button>
+          </div>
+
+          {/* Importer 5: Enterprise Portfolio Scaling */}
+          <div className="p-3.5 rounded-lg border border-emerald-200 bg-emerald-50/50 flex flex-col justify-between space-y-3">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-300 font-mono">
+                  SCALE PORTFOLIO
+                </span>
+                <span className="text-[10px] text-emerald-700 font-semibold">50 Policies</span>
+              </div>
+              <h3 className="text-xs font-bold text-slate-900">Scale to 50 Policies</h3>
+              <p className="text-[10px] text-slate-500 mt-1">
+                Expands portfolio to 50 active policies across 7 Tamil Nadu districts with automatic continuous evaluation.
+              </p>
+            </div>
+            <button
+              onClick={() => handleImport('SCALE', () => integrationApi.scalePortfolio(50))}
+              disabled={importingType !== null}
+              className="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-colors disabled:opacity-50"
+            >
+              <Layers className={`w-3.5 h-3.5 ${importingType === 'SCALE' ? 'animate-spin' : ''}`} />
+              <span>{importingType === 'SCALE' ? 'Scaling...' : 'Scale to 50 Policies'}</span>
             </button>
           </div>
         </div>

@@ -163,6 +163,10 @@ export const integrationApi = {
     const res = await api.post<ImportResult>('/integrations/import/building-footprints');
     return res.data;
   },
+  scalePortfolio: async (count: number = 50): Promise<ImportResult> => {
+    const res = await api.post<ImportResult>(`/integrations/scale-portfolio?count=${count}`);
+    return res.data;
+  },
 };
 
 export const auditApi = {

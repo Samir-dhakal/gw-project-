@@ -12,7 +12,7 @@ import {
   Sliders,
   CheckCircle2
 } from 'lucide-react';
-import { analyticsApi, policyApi } from '../services/api';
+import { analyticsApi, policyApi, integrationApi } from '../services/api';
 import { PortfolioAnalytics, PolicySummary } from '../types';
 import { StatCard } from '../components/StatCard';
 import { ItvBadge } from '../components/ItvBadge';
@@ -34,6 +34,7 @@ export const ExecutiveDashboardPage: React.FC = () => {
   const [analytics, setAnalytics] = useState<PortfolioAnalytics | null>(null);
   const [criticalPolicies, setCriticalPolicies] = useState<PolicySummary[]>([]);
   const [loading, setLoading] = useState(true);
+  const [scaling, setScaling] = useState(false);
 
   const fetchDashboardData = async () => {
     try {
@@ -48,6 +49,18 @@ export const ExecutiveDashboardPage: React.FC = () => {
       console.error('Failed to load dashboard:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleScalePortfolio = async () => {
+    try {
+      setScaling(true);
+      await integrationApi.scalePortfolio(50);
+      await fetchDashboardData();
+    } catch (err: any) {
+      alert('Portfolio expansion failed: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setScaling(false);
     }
   };
 
@@ -100,17 +113,26 @@ export const ExecutiveDashboardPage: React.FC = () => {
             Real-time dwelling coverage adequacy tracking across residential portfolios in Tamil Nadu.
           </p>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={handleScalePortfolio}
+            disabled={scaling}
+            className="inline-flex items-center space-x-2 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-sm transition-colors disabled:opacity-50"
+            title="Generate a realistic enterprise portfolio of 50 active policies across Tamil Nadu"
+          >
+            <Layers className={`w-3.5 h-3.5 ${scaling ? 'animate-spin' : ''}`} />
+            <span>{scaling ? 'Scaling Portfolio...' : (analytics?.totalPoliciesMonitored || 0) < 50 ? 'Scale to 50 Policies' : 'Re-Evaluate 50 Policies'}</span>
+          </button>
           <button
             onClick={fetchDashboardData}
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-700/80 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-600 transition-colors"
+            className="inline-flex items-center space-x-2 px-3 py-2 rounded-lg bg-slate-700/80 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-600 transition-colors"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Refresh Metrics</span>
           </button>
           <Link
             to="/workspace"
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="inline-flex items-center space-x-2 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-colors"
           >
             <span>Review Workspace</span>
             <ArrowUpRight className="w-4 h-4" />

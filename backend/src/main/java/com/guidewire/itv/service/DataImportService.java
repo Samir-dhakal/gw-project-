@@ -29,7 +29,9 @@ public class DataImportService {
     private final PolicyRepository policyRepository;
     private final RebuildingCostEstimateRepository estimateRepository;
     private final EvidenceRecordRepository evidenceRecordRepository;
+    private final CoverageSnapshotRepository snapshotRepository;
     private final IntegrationConfigRepository integrationConfigRepository;
+    private final ContinuousMonitoringService monitoringService;
     private final AuditLogService auditLogService;
     private final ObjectMapper objectMapper;
 
@@ -37,15 +39,222 @@ public class DataImportService {
                              PolicyRepository policyRepository,
                              RebuildingCostEstimateRepository estimateRepository,
                              EvidenceRecordRepository evidenceRecordRepository,
+                             CoverageSnapshotRepository snapshotRepository,
                              IntegrationConfigRepository integrationConfigRepository,
+                             ContinuousMonitoringService monitoringService,
                              AuditLogService auditLogService) {
         this.propertyRepository = propertyRepository;
         this.policyRepository = policyRepository;
         this.estimateRepository = estimateRepository;
         this.evidenceRecordRepository = evidenceRecordRepository;
+        this.snapshotRepository = snapshotRepository;
         this.integrationConfigRepository = integrationConfigRepository;
+        this.monitoringService = monitoringService;
         this.auditLogService = auditLogService;
         this.objectMapper = new ObjectMapper();
+    }
+
+    private static final String[] TAMIL_NAMES = {
+        "Sundaram Ramanathan", "Jayanthi Natarajan", "Karthik Subramanian", "Lakshmi Narayanan",
+        "Arunachalam Murugesan", "Deepa Sridharan", "Venkatesh Raghavan", "Anand Swaminathan",
+        "Revathi Chandrasekar", "Gopalakrishnan V", "Sangeetha Krishnan", "Rajeshwari Balaji",
+        "Suresh Kumaravel", "Kavitha Palaniswamy", "Ramesh Sundararajan", "Manjula Dhanasekaran",
+        "Vijayan Jayaraman", "Bhuvaneshwari K", "Saravanan Muthusamy", "Nithya Soundararajan",
+        "Prasanna Venkatesan", "Devika Ganesan", "Senthil Nathan", "Geetha Parthasarathy",
+        "Balamurugan S", "Vijayalakshmi R", "Chandramohan T", "Sumathi Annamalai",
+        "Ravichandran P", "Malini Thirunavukkarasu", "Srinivasan K", "Padmavathi M",
+        "Dineshkumar S", "Uma Maheswari", "Shankar Narayanan", "Chitra Ramaswamy",
+        "Thiyagarajan V", "Radha Krishnamurthy", "Muthukumar A", "Gowri Shankar",
+        "Sivakumar K", "Hemalatha S", "Muruganantham P", "Sudha Rangarajan"
+    };
+
+    private static final String[][] TN_LOCALITIES = {
+        {"Chennai", "Plot 12, 1st Cross Street, Anna Nagar East", "600102", "1.08"},
+        {"Chennai", "Old No. 45, New No. 22, TTK Road, Alwarpet", "600018", "1.08"},
+        {"Chennai", "Plot 88, 3rd Seaward Road, Valmiki Nagar, Thiruvanmiyur", "600041", "1.08"},
+        {"Chennai", "Door 14, 2nd Avenue, Harrington Road, Chetpet", "600031", "1.08"},
+        {"Chennai", "Plot 305, 5th Main Road, Vijaya Nagar, Velachery", "600042", "1.08"},
+        {"Chennai", "No. 67, G.N. Chetty Road, T. Nagar", "600017", "1.08"},
+        {"Chennai", "Plot 54, 7th Cross, Shastri Nagar, Adyar", "600020", "1.08"},
+        {"Coimbatore", "Site 24, Bharathi Colony, Peelamedu", "641004", "1.04"},
+        {"Coimbatore", "No. 89, D.B. Road, R.S. Puram", "641002", "1.04"},
+        {"Coimbatore", "Plot 17, Green Park Avenue, Vadavalli", "641041", "1.04"},
+        {"Coimbatore", "Door 55, Avinashi Road, Hope College", "641014", "1.04"},
+        {"Coimbatore", "Site 31, Ramalinga Nagar, Saibaba Colony", "641011", "1.04"},
+        {"Madurai", "Plot 19, 80 Feet Road, K.K. Nagar", "625020", "1.02"},
+        {"Madurai", "No. 42, Alagar Kovil Road, Tallakulam", "625002", "1.02"},
+        {"Madurai", "Door 78, Bypass Road, Ponmeni", "625016", "1.02"},
+        {"Madurai", "Plot 105, Lake View Road, K. Pudur", "625007", "1.02"},
+        {"Tiruchirappalli", "No. 33, Salai Road, Woraiyur", "620003", "1.01"},
+        {"Tiruchirappalli", "Plot 61, 10th Cross, Thillai Nagar West", "620018", "1.01"},
+        {"Tiruchirappalli", "Door 28, Collector Office Road, Cantonment", "620001", "1.01"},
+        {"Salem", "Site 14, Cherry Road, Hasthampatti", "636007", "1.01"},
+        {"Salem", "Plot 82, Brindavan Road, Fairlands", "636016", "1.01"},
+        {"Tirunelveli", "Door 50, Trivandrum Road, Palayamkottai", "627002", "1.00"},
+        {"Vellore", "Plot 29, Phase II, Sathuvachari", "632009", "1.01"}
+    };
+
+    /**
+     * Scale the active policy portfolio to a realistic enterprise size (e.g. 50 policies).
+     * Distributes across Tamil Nadu districts with realistic built-up areas, CPWD benchmarks,
+     * historical snapshots, and renewal horizons.
+     */
+    @Transactional
+    public ImportResultDto scalePortfolioTo(int targetCount) {
+        ImportResultDto result = new ImportResultDto("Enterprise Portfolio Scaling (" + targetCount + " Policies)", "GENERATOR", SYNTHETIC_DEMO_DATA);
+        long currentCount = policyRepository.count();
+
+        if (currentCount >= targetCount) {
+            result.getValidationMessages().add("Portfolio already contains " + currentCount + " policies (>= " + targetCount + "). Running batch reassessment.");
+            monitoringService.runBatchMonitoring("PORTFOLIO_REFRESH");
+            result.setRecordsProcessed((int) currentCount);
+            result.setRecordsImported(0);
+            return result;
+        }
+
+        int toGenerate = (int) (targetCount - currentCount);
+        int generated = 0;
+
+        for (int i = 0; i < toGenerate; i++) {
+            int seq = (int) (currentCount + i + 1);
+            String propCode = String.format("PROP-TN-EXT-%03d", seq);
+            String polNum = String.format("POL-IN-2025-%05d", seq);
+
+            String[] loc = TN_LOCALITIES[i % TN_LOCALITIES.length];
+            String city = loc[0];
+            String address = loc[1] + " (Ext " + seq + ")";
+            String pincode = loc[2];
+            BigDecimal costMultiplier = new BigDecimal(loc[3]);
+
+            String name = TAMIL_NAMES[i % TAMIL_NAMES.length];
+            String email = name.toLowerCase().replaceAll("[^a-z]", ".") + "@demo.example.in";
+
+            // Structural parameters
+            int storeys = (i % 3 == 0) ? 1 : 2;
+            BigDecimal builtUpArea = BigDecimal.valueOf(140.0 + ((i * 17) % 180)).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal groundFootprint = builtUpArea.divide(BigDecimal.valueOf(storeys), 2, RoundingMode.HALF_UP);
+            int yearBuilt = 2014 + (i % 9);
+            String constType = (i % 6 == 0) ? "LOAD_BEARING" : "RCC_FRAMED";
+
+            Property prop = new Property();
+            prop.setPropertyCode(propCode);
+            prop.setAddressLine1(address);
+            prop.setCity(city);
+            prop.setDistrict(city);
+            prop.setState("Tamil Nadu");
+            prop.setPostalCode(pincode);
+            prop.setBuiltUpAreaSqm(builtUpArea);
+            prop.setGroundFootprintSqm(groundFootprint);
+            prop.setNumberOfFloors(storeys);
+            prop.setYearBuilt(yearBuilt);
+            prop.setConstructionType(constType);
+            prop.setLandUseType("RESIDENTIAL");
+            Property savedProp = propertyRepository.save(prop);
+
+            // Calculate Rebuilding Cost using CPWD Plinth Rates 2025
+            BigDecimal baseRate = new BigDecimal("23530.00");
+            BigDecimal costPerSqm = baseRate.multiply(costMultiplier).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal rebuildingCost = costPerSqm.multiply(builtUpArea).setScale(2, RoundingMode.HALF_UP);
+
+            // Rebuilding cost estimate
+            RebuildingCostEstimate est = new RebuildingCostEstimate();
+            est.setProperty(savedProp);
+            est.setSourceName("CPWD Plinth Area Rates 2025 (" + city + " Index " + costMultiplier + "x)");
+            est.setEstimatedCost(rebuildingCost);
+            est.setCostPerSqm(costPerSqm);
+            est.setEstimateDate(LocalDate.now().minusMonths(2));
+            est.setMethodology("PLINTH_RATE_REGIONAL_MULTIPLIER");
+            est.setIsPrimary(true);
+            est.setProvenanceCategory(SYNTHETIC_DEMO_DATA);
+            estimateRepository.save(est);
+
+            // Evidence record
+            EvidenceRecord evd = new EvidenceRecord();
+            evd.setProperty(savedProp);
+            evd.setSourceId("CPWD_PAR_2025");
+            evd.setSourceName("CPWD Plinth Area Rates 2025");
+            evd.setPublicationDate(LocalDate.now().minusMonths(3));
+            evd.setSourceReliabilityScore(new BigDecimal("95.00"));
+            evd.setFreshnessScore(new BigDecimal("90.00"));
+            evd.setCompletenessScore(new BigDecimal("100.00"));
+            evd.setProvenanceCategory(SYNTHETIC_DEMO_DATA);
+            evd.setIsValid(true);
+            evidenceRecordRepository.save(evd);
+
+            // Target ITV Distribution:
+            // 35% ADEQUATE (~96% - 100%), 25% WATCH (~91% - 94%), 20% WARNING (~82% - 88%), 20% CRITICAL (~70% - 78%)
+            double ratioMultiplier;
+            String workflowType = "IN_FORCE";
+            int tierSelector = i % 10;
+            if (tierSelector < 4) {
+                ratioMultiplier = 0.96 + ((i % 5) * 0.01); // ADEQUATE
+            } else if (tierSelector < 6) {
+                ratioMultiplier = 0.91 + ((i % 4) * 0.01); // WATCH
+                workflowType = "MIDTERM_REVIEW";
+            } else if (tierSelector < 8) {
+                ratioMultiplier = 0.82 + ((i % 6) * 0.01); // WARNING
+                workflowType = "MIDTERM_REVIEW";
+            } else {
+                ratioMultiplier = 0.70 + ((i % 8) * 0.01); // CRITICAL
+                workflowType = "MIDTERM_REVIEW";
+            }
+
+            BigDecimal coverageLimit = rebuildingCost.multiply(BigDecimal.valueOf(ratioMultiplier))
+                    .setScale(-4, RoundingMode.HALF_UP); // round to nearest 10,000
+
+            // Expiry & Renewal horizon distribution:
+            // Some in 30 days, some in 60 days, some in 90 days, rest later
+            LocalDate inceptDate = LocalDate.now().minusYears(1).plusDays((i * 11) % 180);
+            LocalDate expiryDate;
+            if (i % 6 == 0) {
+                expiryDate = LocalDate.now().plusDays(20 + (i % 10)); // < 30 days renewal!
+                workflowType = "RENEWAL_WINDOW";
+            } else if (i % 6 == 1) {
+                expiryDate = LocalDate.now().plusDays(40 + (i % 20)); // 30-60 days renewal!
+                workflowType = "RENEWAL_WINDOW";
+            } else if (i % 6 == 2) {
+                expiryDate = LocalDate.now().plusDays(65 + (i % 25)); // 60-90 days renewal!
+                workflowType = "RENEWAL_WINDOW";
+            } else {
+                expiryDate = LocalDate.now().plusMonths(4 + (i % 8));
+            }
+
+            Policy policy = new Policy();
+            policy.setPolicyNumber(polNum);
+            policy.setProperty(savedProp);
+            policy.setPolicyholderName(name);
+            policy.setPolicyholderEmail(email);
+            policy.setCurrentCoverageLimit(coverageLimit);
+            policy.setCurrency("INR");
+            policy.setInceptionDate(inceptDate);
+            policy.setExpiryDate(expiryDate);
+            policy.setPolicyStatus("ACTIVE");
+            policy.setWorkflowType(workflowType);
+            Policy savedPolicy = policyRepository.save(policy);
+
+            // Inception Snapshot (Historical)
+            CoverageSnapshot snap = new CoverageSnapshot();
+            snap.setPolicy(savedPolicy);
+            snap.setEffectiveDate(inceptDate);
+            snap.setCoverageLimit(coverageLimit);
+            snap.setReason("INCEPTION");
+            snapshotRepository.save(snap);
+
+            generated++;
+        }
+
+        result.setRecordsProcessed(targetCount);
+        result.setRecordsImported(generated);
+        result.getValidationMessages().add(String.format("Successfully expanded portfolio with %d active Tamil Nadu policies across 7 districts.", generated));
+
+        // Immediately trigger batch continuous monitoring to evaluate the expanded portfolio
+        int evaluated = monitoringService.runBatchMonitoring("PORTFOLIO_SCALE_EXPANSION");
+        result.getValidationMessages().add(String.format("Automated batch continuous monitoring evaluated all %d active policies.", evaluated));
+
+        auditLogService.log("PORTFOLIO_SCALED", "POLICY_PORTFOLIO", "EXPANSION",
+                "Scaled active portfolio to " + targetCount + " policies with automated continuous evaluation.");
+
+        return result;
     }
 
     /**
